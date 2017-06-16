@@ -5,6 +5,7 @@ require(['config'],function(){
 
 		getCookie = getCookie ? JSON.parse(getCookie) : [];
 
+		
 /**********************表头小购物车数字显示*****************************/
 		;(function(){
 			var total = 0;
@@ -18,7 +19,8 @@ require(['config'],function(){
 
 		})();
 
-
+		//获取表头小购物车的text
+		let qtys = parseInt($('.cargoodsqty').text());
 /***************商品数据请求与分页***********************/	
 		let $goodslist = $('.goodslist');
 
@@ -45,13 +47,21 @@ require(['config'],function(){
 					page_str += `<li ${res.pageNo==i?'class="active"':''}><a href="#">${i}</a></li>`
 				}
 
-				$('.pagination').html(page_str);
+				$('.pagination').html(page_str + `<li class="totalPage">共${i-1}页</li>
+						<label>跳转到第<input type="text" class="goPage"/></label>
+						<button class="btnPage">跳转</button>
+
+
+
+					`);
 			}
 		});
 
 		// 点击分页切换
 		$('.pagination').on('click','a',function(){
+
 			$(this).parent().addClass('active').siblings().removeClass();
+
 			pageNo = $(this).text();
 			$.ajax({
 				url:'../api/goods.php',
@@ -68,6 +78,51 @@ require(['config'],function(){
 
 			return false;
 		});
+
+
+		//点击跳转指定页面
+		
+		$('.pagination').on('click','.btnPage',function(){
+			
+			pageNo = $('.goPage').val();
+
+			if(!pageNo){
+				
+				return;
+
+			}else if(pageNo){
+						
+				//页数控制
+				//要转换成数字类型比大小,然后赋予字符串的值以传到后台
+				if(parseInt(pageNo) > parseInt($('.totalPage').text().slice(1,-1))){
+
+					pageNo =$('.totalPage').text().slice(1,-1);
+
+					alert('此页面不存在,已为您跳到最后一页');
+				}
+
+				$.ajax({
+					url:'../api/goods.php',
+					dataType:'json',
+					data:{
+						page:pageNo,
+						qty:qty
+					},
+					success:function(res){
+						showList(res);
+					}
+				})
+			
+				console.log(pageNo-1)
+				$('.pagination li').eq(pageNo-1).addClass('active').siblings().removeClass('active');
+				//清零操作
+				$('.goPage').val('');
+			}
+			
+			return false;
+
+		})
+/***************************按照价格排序***********************************************/
 
 
 		function showList(res){
@@ -88,6 +143,7 @@ require(['config'],function(){
 		}
 	/*******************cookie**************/ 
 		$('.goodslist').on('click','.cargo',function(){
+
 			//获取cookie
 			
 			//获取data-guid属性
@@ -117,12 +173,31 @@ require(['config'],function(){
 			}
 			
 			$.cookie('goods',JSON.stringify(getCookie),{expires:7,path:'/'});
-			location.reload();
+
+			$('.cargoodsqty').text(++qtys);
+			// location.reload();
+			 
+		 	//飞入效果				
+
+			var cloneImg = $(this).closest('div').prev('img').clone(true);
+			
+			$(this).parents('.goods').append(cloneImg);
+
+			$(cloneImg).css({'position':'absolute',zIndex:10,top:0,left:0});
+
+			var left = $('.cargoodsqty').offset().left - $(this).parents('.goods').offset().left;
+
+			var top = $('.cargoodsqty').offset().top - $(this).parents('.goods').offset().top;
+
+			$(cloneImg).animate({left:left,top:top,width:0,height:0},function(){
+				$(cloneImg).remove()
+			})
+				
 			return false;
 
 		})
 
-/****************************************************************/
+/**************************链接到详情页**************************************/
 		$('.goodslist').on('click','.goods',function(){
 			
 

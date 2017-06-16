@@ -1,6 +1,0 @@
-2017-05-23T03:10:24.954878Z 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_for_timestamp server option (see documentation for more details).
-2017-05-23T03:10:27.857044Z 0 [Warning] InnoDB: New log files created, LSN=45790
-2017-05-23T03:10:28.558084Z 0 [Warning] InnoDB: Creating foreign key constraint system tables.
-2017-05-23T03:10:28.943107Z 0 [Warning] No existing UUID has been found, so we assume that this is the first time that this server has been started. Generating a new UUID: 5fca43be-3f65-11e7-b5eb-002713672375.
-2017-05-23T03:10:28.999110Z 0 [Warning] Gtid table is not ready to be used. Table 'mysql.gtid_executed' cannot be opened.
-2017-05-23T03:10:31.093229Z 1 [Warning] root@localhost is created with an empty password ! Please consider switching off the --initialize-insecure option.

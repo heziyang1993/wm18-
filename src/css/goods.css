@@ -285,6 +285,40 @@
   line-height: 30px;
 }
 
+#goodspath .pagination label {
+  float: left;
+  margin-left: 5px;
+  color: #ddd;
+  font-size: 16px;
+}
+
+#goodspath .pagination label .goPage {
+  width: 40px;
+  margin-left: 5px;
+  height: 30px;
+  padding: 0;
+  display: block;
+  background: none;
+  border: 1px solid #ddd;
+  float: right;
+  text-align: center;
+}
+
+#goodspath .pagination .btnPage {
+  float: left;
+  display: block;
+  width: 50px;
+  height: 30px;
+  line-height: 30px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  margin-left: 5px;
+  background-color: #D10048;
+  text-align: center;
+  color: #fff;
+  letter-spacing: 2px;
+}
+
 #goodspath .pagination .active {
   float: left;
   width: 30px;
@@ -313,6 +347,10 @@
   border: 1px solid #ccc;
   border-radius: 2px;
   text-align: center;
+}
+
+#goodspath .pagination li:nth-last-of-type(1) {
+  width: 60px;
 }
 
 #goodspath .pagination li a {

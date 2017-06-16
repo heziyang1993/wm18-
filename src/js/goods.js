@@ -27,7 +27,7 @@ require(['config'],function(){
 		let pageNo = 1;
 
 		let qty = 12;
-
+		console.log($('.active')[0])
 		// 请求数据
 		$.ajax({
 			url:'../api/goods.php',
@@ -50,17 +50,16 @@ require(['config'],function(){
 				$('.pagination').html(page_str + `<li class="totalPage">共${i-1}页</li>
 						<label>跳转到第<input type="text" class="goPage"/></label>
 						<button class="btnPage">跳转</button>
-
-
-
 					`);
 			}
+
 		});
+
 
 		// 点击分页切换
 		$('.pagination').on('click','a',function(){
 
-			$(this).parent().addClass('active').siblings().removeClass();
+			$(this).parent().addClass('active').siblings().removeClass('active');
 
 			pageNo = $(this).text();
 			$.ajax({
@@ -122,7 +121,7 @@ require(['config'],function(){
 			return false;
 
 		})
-/***************************按照价格排序***********************************************/
+
 
 
 		function showList(res){

@@ -9,12 +9,13 @@
 	$password = md5($password);
 
 	$sql = "select * from reg where mobile='".$username."' and password='".$password."'";
-	echo $sql;
+	
 	// 获取查询结果
 	if($username !== ''){
 		$res = $conn->query($sql);
 		//使用查询结果
 		$row = $res->fetch_all(MYSQLI_ASSOC);
+		
 		if($row){
 
 			echo "ok";

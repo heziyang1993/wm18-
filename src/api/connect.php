@@ -4,7 +4,7 @@
 	$servername = 'localhost';
 	$username = 'root';
 	$password = '';
-	$database = 'wm18-login&reg';
+	$database = 'wm';
 
 	//连接数据库
 	$conn = new mysqli($servername,$username,$password,$database);

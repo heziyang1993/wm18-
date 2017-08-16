@@ -1,3 +1,0 @@
-//¹ıÂËnode_modulesÎÄ¼ş¼Ğ
-
-node_modules/
